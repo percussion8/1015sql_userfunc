@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+function check() {
+	var blank = 0;
+	if(form1.id.value=="") blank = 1;
+	if(form1.password.value=="") blank = 1;
+	if(form1.name.value=="") blank = 1;
+	if(form1.email.value=="") blank = 1;
+	if(blank==1) {
+		alert("모든 내용을 입력해주세요");
+		return false;
+	}
+	else {
+		return true;
+	}
+	
+	function check_num(str) {
+		if(isNaN(str)==null){
+			alert("숫자만 입력하세요");
+			return "";
+		} else {
+			return str;
+		}
+	}
+	
+	//함수 정의, 함수 이름 check_num, 파라미터 str,
+	//함수의 기능은 str이 null이면(isNaN 사용) alert ("숫자만 입력하세요")
+	//함수 종료조건 return "";
+	//else 입력받은  str을 반환
+	
+}
+</script>
+<form action="insert.jsp" method="post" name="form1" onsubmit="return check();">
+사용자 id <input type="text" name="id"><br>
+사용자 이름 <input type="text" name="name"><br>
+사용자 암호 <input type="text" name="password" onkeyup="this.value=check_num(this.value)"><br>
+사용자 email <input type="text" name="email"><br>
+<input type="submit" value="확인"><br>
+<input type="reset" value="초기화"><br>
+</form>
+</body>
+</html>
