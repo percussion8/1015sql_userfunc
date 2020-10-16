@@ -40,15 +40,18 @@ try{
 	if(!(rs.next())) { %>
 		해당되는 회원이 없습니다.
 	<% } else {
+		System.out.println(rs.getString("name"));
+		System.out.println(rs.getString("email"));
 		if(password.equals(rs.getString("password"))) { %>
 		사용자 아이디가 <%= id %> 인 회원의 정보는 다음과 같습니다.
 		정보를 변경하려면 내용을 입력한 다음 <수정하기> 버튼을 누르세요.
 		<form action="update.jsp" name="form1" method="post">
-			<input type="hidden" name="id" value=" <%= id %>">
+			<br>아이디:
+			<input type="text" name="id" value="<%= id.trim() %>">
 			<br>이름:
-			<input type="text" name="name" value="<%= rs.getString("name") %>">
+			<input type="text" name="name" value="<%= rs.getString("name").trim() %>">
 			<br>email:
-			<input type="text" name="email" value="<%= rs.getString("email") %>">
+			<input type="text" name="email" value="<%= rs.getString("email").trim() %>">
 			<input type="submit" name="change" value="수정하기">
 			<a href="delete.jsp?id= <%= id %>">삭제하기</a>
 		</form>

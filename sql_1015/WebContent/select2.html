@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+function checkFail(fail) {
+	for(var i of fail) if (i === "") return false;
+	return true;
+}
+	function check() {
+		var arr = [];
+		$("input[name]").each(function (i,j) {
+			arr.push($(j).val());
+			/* if($(this).val() === ""){
+				alert("빈칸이 있습니다, 채워주세요.");
+				//$("form").attr("action","select.html");
+				event.preventDefault();
+				break;
+				
+			} */
+		})
+		var result = checkFail(arr);
+		if(!result){
+			alert("빈칸이 있습니다. 채워주세요.");
+			event.preventDefault();
+		}
+	} 
+	$(document).ready(function () {
+		$("[type=submit]").click(function () {
+			check();
+		})
+	})
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+회원님의 사용자 아이디와 비밀번호를 입력하세요
+<form action="select.jsp" method="post" name="form1" onsubmit="return check()">
+	사용자 아이디 <input type="text" name="id">
+	사용자 비밀번호 <input type="password" name="password">
+	<input type="submit" value="조회">
+</form>
+</body>
+</html>

@@ -3,16 +3,13 @@
     pageEncoding="UTF-8"%>
 <%@ page language = "java" %>
 <%@ page import = "java.sql.*" %>
-<% request.setCharacterEncoding("utf-8"); %>
 
 <%
-String id = request.getParameter("id");
-String name = request.getParameter("name");
-String email =request.getParameter("email");
-String sql = null;
 Connection conn = null;
 Statement st = null;
-System.out.println(id + " " + name + " " + email);
+ResultSet rs = null;
+String sql = null;
+String id = request.getParameter("id");
 
 //jdbc-odbc driver 등록
 try{
@@ -28,24 +25,19 @@ String dbPassword = "1234";
 //DB와 연결
 try{
 	conn = DriverManager.getConnection(dbURL, dbId, dbPassword);
-} catch(SQLException e){
-	out.println("<script>alert('가입처리 되지 않았습니다. 다시 시도해주세요.')</script>");
-}
-
-try{
-	 st = conn.createStatement();
-	//statement객체생성
-			sql = "update woori set ";
-			sql += "name = '" + name + "', email= '" + email + "' ";
-			sql += " where id= '" + id + "'";
-			System.out.println(sql);
+	
+	//statement객체 생성
+	st = conn.createStatement();
+	sql = "delete from woori where id = '" + id + "'";
 	st.executeUpdate(sql);
-	conn.close();
 	st.close();
-} catch (SQLException e){
+	conn.close();
+} catch(SQLException e){
 	out.println(e.getMessage());
 }
+
+
 %>
 <jsp:forward page="selectall.jsp" />
-
+<a href=main.html>메인으로</a>
 
